@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Registro de Empleados</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
-</head>
-<body>
+<?php
+    include_once("config/sections/header.php");
+    include_once("config/sections/navbar.php");
+    ?>
   <section class="section">
     <div class="container">
       <h1 class="title">Registro de Empleados</h1>
@@ -124,5 +120,7 @@
           </form>
       </div>
     </section>
-    </body>
-</html>
+
+    <?php
+    include_once("config/sections/footer.php");
+    ?>

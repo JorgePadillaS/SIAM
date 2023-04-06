@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Registro de compra de combustible</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-    <style>
-        .container {
-            margin-top: 50px;
-        }
-    </style>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="config/js/main.js"></script>
-</head>
-
-<body>
+<?php
+    include_once("config/sections/header.php");
+    include_once("config/sections/navbar.php");
+    ?>
     <section class="section">
         <div class="container">
             <h1 class="title">Registro de compra de combustible</h1>
@@ -25,7 +11,7 @@
                 <div class="field">
                     <label class="label">Código de contrato:</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Ingrese el código de contrato" name="codigo_contrato">
+                        <input class="input" type="text" placeholder="Ingrese el código de contrato" name="codigo_contrato" required>
                     </div>
                 </div>
 
@@ -33,7 +19,7 @@
                     <label class="label">Programa:</label>
                     <div class="control">
                         <div class="select">
-                            <select name="programa" id="programa" required>
+                            <select name="programa" id="programa" required onchange="obtener_valores_programa()">
                                 <option value="">Seleccione un programa</option>
                                 <?php
                                 require_once('config/conexion.php');
@@ -104,7 +90,7 @@
                 <div class="field">
                     <label class="label">Cantidad de combustible adquirido (en litros):</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Ingrese la cantidad de combustible" name="cantidad_combustible" id="cantidad_combustible" required>
+                        <input class="input" type="text" placeholder="Ingrese la cantidad de combustible" name="cantidad_combustible" id="cantidad_combustible" required onchange="calcularmonto()">
                     </div>
                 </div>
 
@@ -123,7 +109,7 @@
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button class="button is-link" id="guardar">Registrar</button>
+                        <button class="button is-link" id="guardar" disabled>Registrar</button>
                     </div>
                 </div>
             </form>
@@ -134,35 +120,58 @@
 
 
     <script>
-        function calcularMonto() {
-            var precioCombustible = document.getElementById("tipo_combustible").value.split("|")[1];
-            var cantidadCombustible = document.getElementById("cantidad_combustible").value;
-            var montoCompra = precioCombustible * cantidadCombustible;
-            document.getElementById("monto_compra").value = montoCompra;
+
+function calcularmonto() {
+      // Obtener el precio del combustible seleccionado
+      var precioCombustible = $('#tipo_combustible').val().split('|')[1];
+      var cantidadCombustible = $('#cantidad_combustible').val();
+      var montoCompra = precioCombustible * cantidadCombustible;
+      var presup=$("#presupuesto_disponible").val();
+
+      if (montoCompra>presup) {
+        alert('El monto de la compra no puede ser mayor al presupuesto disponible.');
+        document.getElementById('guardar').disabled = true;
+        $('#monto_compra').val(montoCompra.toFixed(2));
+          return false;
+          
+      }
+      else{
+        document.getElementById('guardar').disabled = false;
+      }
+     $('#monto_compra').val(montoCompra.toFixed(2));
         }
 
 
-        // Obtener el campo de cantidad de combustible
-        const cantidadCombustible = document.querySelector('input[name="cantidad_combustible"]');
+function obtener_valores_programa() {
+  var selectPrograma = $("#programa");
+  var presupuestoInicial = $("#presupuesto_inicial");
+  var presupuestoDisponible = $("#presupuesto_disponible");
+  var presupuestoUsado ;
+  var pinicial;
 
-        // Obtener el select de tipo de combustible
-        const tipoCombustibleSelect = document.querySelector('select[name="tipo_combustible"]');
+    var programa = $("#programa").val();
+    var valorSeleccionado = selectPrograma.val();
 
-        // Obtener el campo de monto de la compra
-        const montoCompra = document.querySelector('input[placeholder="MONTO TOTAL"]');
+    var valores = valorSeleccionado.split("|");
 
-        // Escuchar el evento "change" en el campo de cantidad de combustible
-        cantidadCombustible.addEventListener('change', () => {
-            // Obtener el precio del combustible seleccionado
+    presupuestoInicial.val(valores[1]);
 
-            var precioCombustible = document.getElementById("tipo_combustible").value.split("|")[1];
-            var cantidadCombustible = document.getElementById("cantidad_combustible").value;
-            var montoCompra = precioCombustible * cantidadCombustible;
-
-            document.getElementById("monto_compra").value = montoCompra.toFixed(2);
-        });
+    $.ajax({
+      url: 'funciones/Obtener_presupuesto_usado.php',
+      method: 'POST',
+      data: { programa: programa },
+      success: function(response) {
+        $('#presupuesto_usado').val(response);
+        presupuestoUsado=response;
+        pinicial=valores[1];
+        var total=valores[1]-presupuestoUsado;
+        console.log(total);
+        presupuestoDisponible.val(total);
+      }  
+    });
+  }
     </script>
 
-</body>
-
-</html>
+    <?php
+    include_once("config/sections/footer.php");
+    ?>

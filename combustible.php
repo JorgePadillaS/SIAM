@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Registro de Combustible</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-  </head>
-  <body>
+<?php
+    include_once("config/sections/header.php");
+    include_once("config/sections/navbar.php");
+    ?>
     <section class="section">
       <div class="container">
         <h1 class="title">Registro de Combustible</h1>
@@ -31,5 +26,6 @@
         </form>
       </div>
     </section>
-  </body>
-</html>
+    <?php
+    include_once("config/sections/footer.php");
+    ?>
