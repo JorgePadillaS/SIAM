@@ -33,7 +33,7 @@
                     <label class="label">Programa:</label>
                     <div class="control">
                         <div class="select">
-                            <select name="programa" id="programa">
+                            <select name="programa" id="programa" required>
                                 <option value="">Seleccione un programa</option>
                                 <?php
                                 require_once('config/conexion.php');
@@ -79,7 +79,7 @@
                     <label class="label">Tipo de combustible:</label>
                     <div class="control">
                         <div class="select">
-                            <select name="tipo_combustible" id="tipo_combustible">
+                            <select name="tipo_combustible" id="tipo_combustible" required>
                                 <option value="">Seleccione el tipo de combustible</option>
                                 <?php
                                 require_once('config/conexion.php');
@@ -104,14 +104,14 @@
                 <div class="field">
                     <label class="label">Cantidad de combustible adquirido (en litros):</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Ingrese la cantidad de combustible" name="cantidad_combustible" id="cantidad_combustible">
+                        <input class="input" type="text" placeholder="Ingrese la cantidad de combustible" name="cantidad_combustible" id="cantidad_combustible" required>
                     </div>
                 </div>
 
                 <div class="field">
                     <label class="label">Fecha de compra:</label>
                     <div class="control">
-                        <input class="input" type="date" name="fecha">
+                        <input class="input" type="date" name="fecha" required>
                     </div>
                 </div>
 
@@ -123,7 +123,7 @@
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button class="button is-link">Registrar</button>
+                        <button class="button is-link" id="guardar">Registrar</button>
                     </div>
                 </div>
             </form>
