@@ -121,7 +121,7 @@
 
     <script>
 
-function calcularmonto() {
+    function calcularmonto() {
       // Obtener el precio del combustible seleccionado
       var precioCombustible = $('#tipo_combustible').val().split('|')[1];
       var cantidadCombustible = $('#cantidad_combustible').val();

@@ -1,27 +1,28 @@
 <?php
-require_once('../config/conexion.php');
+require_once('../config/conexion.php'); // conexión a la base de datos
 
-if (!$conexion) {
-  die('Error de conexión: ' . mysqli_connect_error());
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // obtenemos los datos del formulario
+  $num_contrato = $_POST['num_contrato'];
+  $programa = $_POST['programa'];
+  $tipo_combustible = $_POST['tipo_combustible'];
+  $cantidad_combustible_comprado = $_POST['cantidad_combustible_comprado'];
+  $cantidad_combustible_disponible = $_POST['total_combustible_dispensado'];
+  $cantidad_combustible_a_dispensar = $_POST['cantidad_combustible_a_dispensar'];
+  $chofer = $_POST['chofer'];
+  $vehiculo = $_POST['vehiculo'];
+
+  // consulta SQL para insertar los datos en la tabla correspondiente
+  $query = "INSERT INTO registro_dispensaciones (numcontrato, programa, tipo_combustible, cantidad_combustible_disponible, cantidad_combustible_dispensado, chofer, vehiculo) VALUES ('$num_contrato', '$programa', '$tipo_combustible', '$cantidad_combustible_disponible', '$cantidad_combustible_a_dispensar', '$chofer', '$vehiculo')";
+
+  // ejecutamos la consulta y verificamos si se ha insertado correctamente
+  if (mysqli_query($conexion, $query)) {
+    header('Location: ../index.php');
+  } else {
+    echo "Error al insertar el registro: " . mysqli_error($conexion);
+  }
+
+  // cerramos la conexión a la base de datos
+  mysqli_close($conexion);
 }
-// Recuperar los datos del formulario
-$programa = $_POST["programa"];
-$tipo_combustible = $_POST["tipo_combustible"];
-$cantidad_combustible = $_POST["cantidad_combustible"];
-$chofer = $_POST["chofer"];
-$vehiculo = $_POST["vehiculo"];
-
-// Insertar los datos en la base de datos
-$sql = "INSERT INTO dispensaciones (programa, tipo_combustible, cantidad_combustible, chofer, vehiculo) VALUES ('$programa', '$tipo_combustible', $cantidad_combustible, '$chofer', '$vehiculo')";
-mysqli_query($conexion, $sql);
-
-// Actualizar el stock de combustible disponible
-$sql = "UPDATE stock_combustible SET cantidad_disponible = cantidad_disponible - $cantidad_combustible WHERE tipo_combustible = '$tipo_combustible'";
-mysqli_query($conexion, $sql);
-
-// Cerrar la conexión a la base de datos
-mysqli_close($conexion);
-
-// Redirigir a la página principal
-header("Location: index.php");
 ?>

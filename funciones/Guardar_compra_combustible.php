@@ -35,8 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //echo ("CODIGO DE CONTRATO ".$codigo_contrato."<br> ID PROGRAMA ". $id_programa."<br> PRESUPUESTO INICIAL". $presupuesto_inicial."<br> PRESUPUESTO DISPONIBLE". $presupuesto_disponible."<br> ID TIPO DE COMBUSTIBLE ". $id_tipo_combustible."<br> CANTIDAD DE COMBUSTIBLE ". $cantidad_combustible."<br> PRECIO DEL COMBUSTIBLE ". $precio_combustible."<br> MONTO DE LA COMPRA ". $monto_compra."<br> FECHA DE LA COMPRA ". $fecha);
 
   // Ejecutamos la consulta
-  if (mysqli_query($conexion, $query)) {
-    echo "Los datos se han registrado correctamente";
+  if (mysqli_query($conexion, $query)) {header('Location: ../index.php');
   } else {
     echo "Error: " . $query . "<br>" . mysqli_error($conexion);
   }
