@@ -67,6 +67,37 @@
         </div>
 
         <div class="field">
+          <label class="label">DISPENSAR EN BIDON:</label>
+          <input type="checkbox" name="bidon" id="">
+        </div>
+
+
+        <div class="field">
+          <label class="label">FUNCIONARIO:</label>
+          <div class="control">
+            <div class="select">
+            <option value="">Seleccione un funcionario</option>
+            <option value="1"></option>
+          </div>
+          </div>
+        </div>
+
+
+        <div class="field">
+          <label class="label">PARA ALMACEN DE MAESTRANZA:</label>
+          <input type="checkbox" name="bidon" id="">
+          <label class="label">CODIGO DE AUTORIZACION:</label>
+          <input type="text" name="CODIGO DE AUTORIZACION" id="">
+        </div>
+
+        <div class="field">
+          <label class="label">PARA ALMACEN DE CEAM:</label>
+          <input type="checkbox" name="bidon" id="">
+          <label class="label">CODIGO DE AUTORIZACION:</label>
+          <input type="text" name="CODIGO DE AUTORIZACION" id="">
+        </div>
+
+        <div class="field">
           <label class="label">Chofer:</label>
           <div class="control">
             
@@ -87,6 +118,8 @@
           </div>
           </div>
         </div>
+
+        
 
         <div class="field">
           <label class="label">Vehículo:</label>

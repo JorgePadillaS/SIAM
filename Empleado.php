@@ -54,6 +54,14 @@
             <input class="input" type="date" name="fecha_fin_contrato" required>
           </div>
         </div>
+
+        <div class="field">
+          <label class="label">Cargo:</label>
+          <div class="control">
+            <input class="input" type="text" name="cargo_del_funcionario" required>
+          </div>
+        </div>
+
         <div class="field">
           <label class="label">Programa:</label>
           <div class="control">
