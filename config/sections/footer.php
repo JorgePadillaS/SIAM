@@ -3,7 +3,7 @@
       <div class="level">
         <div class="level-left">
           <div class="level-item">
-            © 2020, JustBoil.me
+            © 2020, Sistema Integrado de Administracion Municipal
           </div>
           <div class="level-item">
             <a href="https://github.com/vikdiesel/admin-one-bulma-dashboard" style="height: 20px">
@@ -25,7 +25,7 @@
     <div class="modal-background jb-modal-close"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Confirm action</p>
+        <p class="modal-card-title">Comfirmar Acción</p>
         <button class="delete jb-modal-close" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
